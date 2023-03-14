@@ -10,7 +10,7 @@ class Cards extends Component{
         const {title,username,id,photo}=this.props;
         return(
             <Card style={{ width: '100%' }} id={id}>
-            <Card.Img variant="top" src={`http://localhost:8080/images/image-${photo}.jpeg`} />
+            <Card.Img variant="top" src={`http://localhost:8080/images/${photo}`} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>
