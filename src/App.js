@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 import  axios  from 'axios';
 import Container from 'react-bootstrap/Container'
 import Cards from './components/card/card.component';
-
+import { Route,Routes } from 'react-router-dom';
 
 class App extends Component{
   
@@ -18,7 +18,7 @@ class App extends Component{
     this.state={
       data:[],
     }
-    fetch('http://localhost:8080/posts').then(res => res.json()).then(data => this.setState({data}))
+    fetch('http://localhost:5000/posts').then(res => res.json()).then(data => this.setState({data}))
     this.i=1;
   }
 
@@ -49,12 +49,15 @@ class App extends Component{
       <div className='App'>
         
         <NavBar />
-        <Container >
+        <Routes>
+          <Route path='/' element={<Container >
         <Row className='cardContainer'>
         {this.show()}
         
         </Row>
-        </Container>
+        </Container>} />
+        <Route path='home' element={<h1>hello world</h1>} />
+        </Routes>
       </div>
     );
   }
