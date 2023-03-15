@@ -7,7 +7,7 @@ class Cards extends Component{
 
 
     render(){
-        const {title,username,id,photo}=this.props;
+        const {title,username,id,photo,clickHandler}=this.props;
         return(
             <Card style={{ width: '100%' }} id={id}>
             <Card.Img variant="top" src={`http://localhost:8080/images/image-${photo}.jpeg`} />
@@ -16,7 +16,7 @@ class Cards extends Component{
               <Card.Text>
                 {username}
               </Card.Text>
-              <Button variant="primary">See details</Button>
+              <Button variant="primary" onClick={clickHandler}>See details</Button>
             </Card.Body>
           </Card>
         )
