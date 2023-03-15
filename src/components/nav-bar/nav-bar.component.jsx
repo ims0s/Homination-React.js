@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Outlet } from "react-router-dom";
 class NavBar extends Component{
 
   constructor(){
@@ -16,7 +16,8 @@ class NavBar extends Component{
   render(){
 
         return(
-          <Navbar bg="light" expand="lg">
+          <div>
+            <Navbar bg="light" expand="lg">
           <Container fluid>
             <Navbar.Brand href="/">Homination</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -44,6 +45,8 @@ class NavBar extends Component{
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <Outlet/>
+          </div>
         )
     }
 }

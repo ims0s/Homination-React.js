@@ -21,6 +21,11 @@ class App extends Component{
     
     return (
       <div className='App'>
+        <Routes>
+          
+            <Route path='/' element={<HomePage />} />
+          
+        </Routes>
         
         <NavBar />
         <Routes>
@@ -34,7 +39,6 @@ class App extends Component{
   }
 
 }
-
 
 
 export default App;
