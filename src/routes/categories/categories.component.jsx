@@ -3,8 +3,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Cards from '../../components/card/card.component'
-import OffCanvas from "../../components/offcanvas/offcanvas.component";
-import { Outlet, Route,Routes } from "react-router-dom";
+// import OffCanvas from "../../components/offcanvas/offcanvas.component";
+import { Outlet, } from "react-router-dom";
 import './categories.style.css'
 class Categories extends Component{
     constructor(){
@@ -13,8 +13,12 @@ class Categories extends Component{
             data:[],
             show:false,
           }
-          fetch('http://localhost:5000/posts').then(res => res.json()).then(data => this.setState({data}))
           
+          
+    }
+
+    componentDidMount(){
+      fetch('http://localhost:5000/posts').then(res => res.json()).then(data => this.setState({data}))
     }
 
 
@@ -25,11 +29,11 @@ class Categories extends Component{
 
 
     view = (card) => {
-        console.log(card)
-        const {title,username,id,photo}=card;
+        
+        const {title,username,_id,photo}=card;
         return(
-          <Col xs={12} lg={3}>
-            <Cards title={title} username={username} id={id} photo={this.i++} clickHandler={this.setShow}/>
+          <Col xs={12} lg={3} id={_id}>
+            <Cards title={title} username={username} id={_id} photo={this.i++} clickHandler={this.setShow}/>
           </Col>
         )
       }
@@ -40,13 +44,14 @@ class Categories extends Component{
       
 
     render(){
-        const {show}=this.state;
+        // const {show}=this.state;
         return (
-            <Container className="transparent" >
-                <Row>
+            <Container className="transparent" id="CategoriesContainer">
+                <Row id="1">
                     {this.show()}
                 </Row>
                 <Outlet />
+                
             </Container>
         )
     }

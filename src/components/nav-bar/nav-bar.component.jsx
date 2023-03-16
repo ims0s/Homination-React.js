@@ -9,9 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet } from "react-router-dom";
 class NavBar extends Component{
 
-  constructor(){
-    super();
-  }  
   
   render(){
 
@@ -29,8 +26,8 @@ class NavBar extends Component{
               >
                 <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Categories" id="navbarScrollingDropdown" href='/categories'>
-                  <NavDropdown.Item href="/categories?id=painting">Painting</NavDropdown.Item>
-                  <NavDropdown.Item href="/categories?id=foundation">Foundation</NavDropdown.Item>
+                  <NavDropdown.Item href="/categories/painting">Painting</NavDropdown.Item>
+                  <NavDropdown.Item href="/categories/foundation">Foundation</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">

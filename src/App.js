@@ -11,27 +11,24 @@ import OffCanvas from './components/offcanvas/offcanvas.component';
 class App extends Component{
   
   
-  constructor(){
-    super();
-    
-  }
+  
 
   
   render (){
     
     return (
       <div className='App'>
-        <Routes>
-          
-            <Route path='/' element={<HomePage />} />
-          
-        </Routes>
         
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/categories' element={<Categories />} >
-            <Route path="categories/details" element={<OffCanvas show={true} />}/>
+          <Route path='/categories'  >
+            <Route path=':type' element={<Categories />}>
+              <Route path="details" >
+                <Route path=':id' element={<OffCanvas show={true} />}/>
+              </Route>
+
+            </Route>
           </Route>
         </Routes>
       </div>
