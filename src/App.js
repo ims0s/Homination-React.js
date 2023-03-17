@@ -19,17 +19,21 @@ class App extends Component{
     return (
       <div className='App'>
         
-        <NavBar />
+        
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/categories'  >
-            <Route path=':type' element={<Categories />}>
-              <Route path="details" >
-                <Route path=':service_id' element={<OffCanvas show={true} />}/>
-              </Route>
+          <Route path='/' element={<NavBar />}>
 
+            <Route index element={<Home />} />
+            <Route path='/categories'  >
+              <Route path=':type' element={<Categories />}>
+                <Route path="details" >
+                  <Route path=':service_id' element={<OffCanvas show={true} />}/>
+                </Route>
+
+              </Route>
             </Route>
           </Route>
+          <Route path='/login' element></Route>
         </Routes>
       </div>
     );
