@@ -25,7 +25,7 @@ class App extends Component{
           <Route path='/categories'  >
             <Route path=':type' element={<Categories />}>
               <Route path="details" >
-                <Route path=':id' element={<OffCanvas show={true} />}/>
+                <Route path=':service_id' element={<OffCanvas show={true} />}/>
               </Route>
 
             </Route>
