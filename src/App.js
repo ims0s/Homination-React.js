@@ -7,12 +7,8 @@ import { Route,Routes } from 'react-router-dom';
 import Home from './routes/home/home.component';
 import Categories from './routes/categories/categories.component';
 import OffCanvas from './components/offcanvas/offcanvas.component';
-
+import Login from './routes/Login/login.component'
 class App extends Component{
-  
-  
-  
-
   
   render (){
     
@@ -33,7 +29,7 @@ class App extends Component{
               </Route>
             </Route>
           </Route>
-          <Route path='/login' element></Route>
+          <Route path='/login' element={<Login />}></Route>
         </Routes>
       </div>
     );
