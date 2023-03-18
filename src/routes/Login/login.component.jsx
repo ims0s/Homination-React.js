@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import  Form  from "react-bootstrap/Form";
 import  Button  from "react-bootstrap/Button";
 import './login.style.css'
+import axios from "axios";
+
 class Login extends Component{
     constructor(){
         super();
@@ -18,6 +20,7 @@ class Login extends Component{
     submitHandler=(event) => {
         const form = event.currentTarget;
         const {email,password}=this.state
+        const {nav} =this.props
         if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
@@ -25,11 +28,12 @@ class Login extends Component{
             // this.props.nav('/')
             event.preventDefault();
             event.stopPropagation();
-            fetch('http://localhost:5000/auth/login',{
-                method:"POST",
-                body:JSON.stringify({username:email,password})
-
-            }).then(res => res.json).then(data => console.log(data))
+            axios.post('http://localhost:5000/auth/login',{"username":email,password})
+            .then(res => res.data )
+            .then(data=> nav('/')).catch(res => {
+                const {data}= res.response;
+                this.setState(() => ({data}))
+            })
         }
 
         this.setState(() => ({validate:true}))
@@ -60,7 +64,7 @@ class Login extends Component{
 
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required/>
+                    <Form.Control type="password" placeholder="Password" onChange={onChangeHandler} required/>
                     <Form.Control.Feedback type="invalid">
                         Enter your password!!
                     </Form.Control.Feedback>
@@ -68,7 +72,7 @@ class Login extends Component{
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-
+                {this.state.data && <span> {this.state.data}</span>}
             </Form>
             </Container>
         )
