@@ -12,14 +12,14 @@ class Login extends Component{
 
         this.state={
             validate:false,
-            email:'',
+            username:'',
             password:''
         }
 
     }
     submitHandler=(event) => {
         const form = event.currentTarget;
-        const {email,password}=this.state
+        const {username,password}=this.state
         const {nav} =this.props
         if (form.checkValidity() === false) {
         event.preventDefault();
@@ -28,9 +28,9 @@ class Login extends Component{
             // this.props.nav('/')
             event.preventDefault();
             event.stopPropagation();
-            axios.post('http://localhost:5000/auth/login',{"username":email,password})
+            axios.post('http://localhost:5000/auth/login',{username,password})
             .then(res => res.data )
-            .then(data=> nav('/')).catch(res => {
+            .then(()=> nav('/')).catch(res => {
                 const {data}= res.response;
                 this.setState(() => ({data}))
             })
@@ -42,7 +42,7 @@ class Login extends Component{
 
     onChangeHandler= (e)=>{
         const {id,value} = e.target
-        this.setState(()=>({[id]:value}),() => console.log(this.state))
+        this.setState(()=>({[id]:value}))
     }
     
 
@@ -52,13 +52,13 @@ class Login extends Component{
         return(
             <Container className="authContainer" >
                
-                <h1> Homination</h1>
+                <h1>Homination</h1>
                <Form className="authForm" noValidate validated={validate} onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlId="email">
-                    <Form.Label>Email address</Form.Label>
+                <Form.Group className="mb-3" controlId="username">
+                    <Form.Label>Username</Form.Label>
                     <Form.Control type="text" placeholder="example@email.com" onChange={onChangeHandler}   required />
                     <Form.Control.Feedback type='invalid' >
-                    Enter your email like this : example@email.com
+                    Enter your Username
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -66,7 +66,7 @@ class Login extends Component{
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={onChangeHandler} required/>
                     <Form.Control.Feedback type="invalid">
-                        Enter your password!!
+                        Enter your Password!!
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Button variant="primary" type="submit">
@@ -78,13 +78,14 @@ class Login extends Component{
         )
     }
 }
-export default (props)=>{
+const LoginHooks= (props)=>{
     const nav = useNavigate();
-
+    
     return ( 
         <Login 
         {...props}
         nav={nav}
         />
-    )
-}
+        )
+    }
+    export default LoginHooks;

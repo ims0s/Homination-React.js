@@ -8,6 +8,7 @@ import Home from './routes/home/home.component';
 import Categories from './routes/categories/categories.component';
 import OffCanvas from './components/offcanvas/offcanvas.component';
 import Login from './routes/Login/login.component'
+import Register from './routes/register/register.component'
 class App extends Component{
   
   render (){
@@ -29,7 +30,8 @@ class App extends Component{
               </Route>
             </Route>
           </Route>
-          <Route path='/login' element={<Login />}></Route>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
         </Routes>
       </div>
     );
