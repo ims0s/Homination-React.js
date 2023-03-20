@@ -1,11 +1,11 @@
-import { Component } from "react";
+import { Component, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import  Form  from "react-bootstrap/Form";
 import  Button  from "react-bootstrap/Button";
 import './login.style.css'
 import axios from "axios";
-
+import { UserContext } from "../../context/auth.context";
 class Login extends Component{
     constructor(){
         super();
@@ -20,7 +20,8 @@ class Login extends Component{
     submitHandler=(event) => {
         const form = event.currentTarget;
         const {username,password}=this.state
-        const {nav} =this.props
+        const {nav,userContext} =this.props
+        const {setCurrentUser}=userContext
         if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
@@ -30,7 +31,13 @@ class Login extends Component{
             event.stopPropagation();
             axios.post('http://localhost:5000/auth/login',{username,password})
             .then(res => res.data )
-            .then(()=> nav('/')).catch(res => {
+            .then((data)=> {
+                setCurrentUser(data)
+                nav('/')
+
+            })
+            .catch(res => {
+                console.log(res)
                 const {data}= res.response;
                 this.setState(() => ({data}))
             })
@@ -52,8 +59,8 @@ class Login extends Component{
         return(
             <Container className="authContainer" >
                
+               <Form className="authForm"  onSubmit={submitHandler}>
                 <h1>Homination</h1>
-               <Form className="authForm" noValidate validated={validate} onSubmit={submitHandler}>
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="text" placeholder="example@email.com" onChange={onChangeHandler}   required />
@@ -68,11 +75,12 @@ class Login extends Component{
                     <Form.Control.Feedback type="invalid">
                         Enter your Password!!
                     </Form.Control.Feedback>
+                {this.state.data && <span className="worng"> {this.state.data}</span>}
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-                {this.state.data && <span> {this.state.data}</span>}
+                <p>New User? <span className="anotherPage" onClick={() => {this.props.nav('/register')}}>Create Account</span></p>
             </Form>
             </Container>
         )
@@ -85,6 +93,7 @@ const LoginHooks= (props)=>{
         <Login 
         {...props}
         nav={nav}
+        userContext={useContext(UserContext)}
         />
         )
     }

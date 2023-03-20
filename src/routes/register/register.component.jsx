@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import  Form  from "react-bootstrap/Form";
 import  Button  from "react-bootstrap/Button";
-import Overlay from 'react-bootstrap/Overlay';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import '../Login/login.style.css'
 import axios from "axios";
@@ -28,9 +28,6 @@ class Register extends Component{
                 },
 
             ],
-            show :false,
-            target:'',
-
         }
         
     }
@@ -59,6 +56,17 @@ class Register extends Component{
         })
     }
 
+    Popover =() =>{
+       const {passwordRules}=this
+       
+        return( 
+       <Popover id="popover-contained">
+            <Popover.Header as="h3">Password should contians :</Popover.Header>
+            <Popover.Body>
+                {passwordRules()}
+            </Popover.Body>
+        </Popover>)
+    }
     onChangeHandler= (e)=>{
         const {id,value} = e.target
         this.setState(()=>({auth:{...this.state.auth,[id]:value}}))
@@ -83,21 +91,15 @@ class Register extends Component{
         this.setState(()=>({auth:{...this.state.auth,[id]:value}}))
     })
 
-    onFocus =(e)=>{
-        const {show} = this.state;
-        !show && this.setState(()=>({show:!show}))
-        this.setState(()=>({target:e.target}))
-    }
-
     render(){
-        const {validate,auth,show,target }= this.state
-        const {onChangeHandler , submitHandler,onFocus,passwordRules} =this;
+        const {validate,auth}= this.state
+        const {onChangeHandler , submitHandler , Popover,} =this;
         
         return(
             <Container className="authContainer" >
                
-                <h1> Homination</h1>
                <Form className="authForm" noValidate validated={validate} onSubmit={submitHandler}>
+                <h1> Homination</h1>
                <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="text" placeholder="Username" onChange={onChangeHandler} required/>
@@ -115,24 +117,14 @@ class Register extends Component{
 
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={this.passwordOnchange} onFocus={onFocus} minLength={6} pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}' required/>
+                    <OverlayTrigger trigger="focus" placement="right" overlay={Popover()}>
+                        <Form.Control type="password" placeholder="Password" onChange={this.passwordOnchange} 
+                            minLength={6} pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}' required
+                        />
+                    </OverlayTrigger>
                     <Form.Control.Feedback type="invalid">
                         Enter your password!!
                     </Form.Control.Feedback>
-                    <Overlay
-                    show={show}
-                    target={target}
-                    placement="right"
-                    
-                    containerPadding={20}
-                    >
-                        <Popover id="popover-contained">
-                        <Popover.Header as="h3">Password should contians :</Popover.Header>
-                        <Popover.Body>
-                            {passwordRules()}
-                        </Popover.Body>
-                        </Popover>
-                    </Overlay>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="re-enter-password">
                     <Form.Label>Confirm Password</Form.Label>
@@ -144,7 +136,7 @@ class Register extends Component{
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-
+                <p>Already Have Account? <span className="anotherPage" onClick={() => {this.props.nav('/Login')}}>Login</span></p>
             </Form>
             </Container>
         )

@@ -29,9 +29,9 @@ class App extends Component{
 
               </Route>
             </Route>
-          </Route>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          </Route>
         </Routes>
       </div>
     );

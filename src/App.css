@@ -10,3 +10,16 @@ html,.App{
   height: 100%;
   background-image: url(https://theme.kalungi.com/hubfs/Layout%2010.jpg);
 }
+
+.anotherPage{
+  text-decoration: underline;
+}
+.authForm{
+  width: 350px;
+  padding: 20px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

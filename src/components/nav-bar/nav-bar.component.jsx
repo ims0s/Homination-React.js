@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component , Fragment,useContext } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -6,18 +6,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Outlet } from "react-router-dom";
-import { NavLink } from "react-bootstrap";
-class NavBar extends Component{
+import { Outlet,useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/auth.context";
 
+
+class NavBar extends Component{
   
   render(){
-
+        const {currentUser ,setCurrentUser} = this.props.userContext
+        const {navigate}=this.props
+        
         return(
-          <div>
-            <Navbar bg="light" expand="lg">
+          <Fragment>
+            <Navbar bg="light" expand="lg" sticky="top">
           <Container fluid>
-            <Navbar.Brand href="/">Homination</Navbar.Brand>
+            <Navbar.Brand onClick={()=>navigate('/')}>Homination</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
@@ -25,10 +28,10 @@ class NavBar extends Component{
                 style={{ maxHeight: '100px' }}
                 
               >
-                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link onClick={()=>navigate('/')}>Home</Nav.Link>
                 <NavDropdown title="Categories" id="navbarScrollingDropdown" href='/categories'>
-                  <NavDropdown.Item href="/categories/painting">Painting</NavDropdown.Item>
-                  <NavDropdown.Item href="/categories/foundation">Foundation</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>navigate('/categories/painting')}>Painting</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>navigate('/categories/foundation')}>Foundation</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">
@@ -45,16 +48,34 @@ class NavBar extends Component{
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
+                {currentUser?(
+                  <Nav.Link onClick={()=>setCurrentUser(null)}>Logout</Nav.Link>
+                  )
+                  :(
+                    <Fragment>
+                    <Nav.Link onClick={()=>navigate('/Login')}>Login</Nav.Link>
+                    <Nav.Link onClick={()=>navigate('/register')}>Register</Nav.Link>
+                    </Fragment>
+                  )
+                }
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
         <Outlet/>
-          </div>
+          </Fragment>
         )
     }
 }
 
-export default NavBar
+ const NavbarHook= (props)=>{
+  
+  return (
+  <NavBar
+    {...props}
+    userContext={useContext(UserContext)}
+    navigate={useNavigate()}
+  />
+  )
+}
+export default NavbarHook
