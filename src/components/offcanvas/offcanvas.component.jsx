@@ -32,7 +32,7 @@ class OffCanvas extends Component{
     componentDidMount(){
         const {service_id} = this.props.params;
             console.log(this.props)
-        fetch(`http://localhost:5000/posts/${service_id}`)
+        fetch(`http://localhost:5000/services/${service_id}`)
         .then((res)=> res.json())
         .then((data)=> this.setState(() => ({data:data})))
         
@@ -48,12 +48,12 @@ class OffCanvas extends Component{
             this.setState(() => {return {navigate:true}})
         },500) 
         return (
-            <Offcanvas show={show} onHide={this.handleClose} backdrop="static" id="detailOffCanvas">
+            <Offcanvas show={show} onHide={this.handleClose} placement="end" id="detailOffCanvas">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>{data.title}</Offcanvas.Title>
+                <Offcanvas.Title>{data.provider}</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <h1>{data.username}</h1>
+                <h1>{data.title}</h1>
                 <h5>{data.desc}</h5>
                 
                 

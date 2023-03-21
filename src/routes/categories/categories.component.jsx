@@ -3,9 +3,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Cards from '../../components/card/card.component'
-// import OffCanvas from "../../components/offcanvas/offcanvas.component";
+import ListGroup from 'react-bootstrap/ListGroup'
 import { Outlet, } from "react-router-dom";
 import './categories.style.css'
+import ListGroupItem from "../../components/listGroupItem/listGroupItem.component";
 class Categories extends Component{
     constructor(){
         super();
@@ -18,7 +19,7 @@ class Categories extends Component{
     }
 
     componentDidMount(){
-      fetch('http://localhost:5000/posts').then(res => res.json()).then(data => this.setState({data}))
+      fetch('http://localhost:5000/services').then(res => res.json()).then(data => this.setState({data}))
     }
 
 
@@ -30,11 +31,11 @@ class Categories extends Component{
 
     view = (card) => {
         
-        const {title,username,_id,photo}=card;
+        const {title,provider,_id,desc}=card;
         return(
-          <Col xs={12} lg={3} id={_id}>
-            <Cards title={title} username={username} id={_id} photo={this.i++} clickHandler={this.setShow}/>
-          </Col>
+          
+            <ListGroupItem title={title} username={provider} desc={desc} id={_id} photo="https://st.hzcdn.com/fimgs/9721524c0144b220_9930-w368-h207-b0-p0---.jpg"/>
+          
         )
       }
       setShow=()=>{
@@ -45,11 +46,12 @@ class Categories extends Component{
 
     render(){
         // const {show}=this.state;
+        const now = (<Row id="1"></Row>)
         return (
             <Container className="transparent" id="CategoriesContainer">
-                <Row id="1">
-                    {this.show()}
-                </Row>
+                <ListGroup>
+                  {this.show()}
+                </ListGroup>
                 <Outlet />
                 
             </Container>
