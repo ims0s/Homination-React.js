@@ -8,12 +8,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet,useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/auth.context";
+import { CategoryContext } from "../../context/category.context";
 
 
 class NavBar extends Component{
   
   render(){
         const {currentUser ,setCurrentUser} = this.props.userContext
+        const {currentCategory,setCurrentCategory}=this.props.categoryContext
         const {navigate}=this.props
         
         return(
@@ -30,8 +32,8 @@ class NavBar extends Component{
               >
                 <Nav.Link onClick={()=>navigate('/')}>Home</Nav.Link>
                 <NavDropdown title="Categories" id="navbarScrollingDropdown" href='/categories'>
-                  <NavDropdown.Item onClick={()=>navigate('/categories/painting')}>Painting</NavDropdown.Item>
-                  <NavDropdown.Item onClick={()=>navigate('/categories/foundation')}>Foundation</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/painting'); setCurrentCategory(!currentCategory) }}>Painting</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/foundation'); setCurrentCategory(!currentCategory)}}>Foundation</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">
@@ -74,6 +76,7 @@ class NavBar extends Component{
   <NavBar
     {...props}
     userContext={useContext(UserContext)}
+    categoryContext={useContext(CategoryContext)}
     navigate={useNavigate()}
   />
   )

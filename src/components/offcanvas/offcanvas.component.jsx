@@ -31,7 +31,7 @@ class OffCanvas extends Component{
     
     componentDidMount(){
         const {service_id} = this.props.params;
-            console.log(this.props)
+            console.log(this.props.params)
         fetch(`http://localhost:5000/services/${service_id}`)
         .then((res)=> res.json())
         .then((data)=> this.setState(() => ({data:data})))
