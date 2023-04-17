@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet,useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/auth.context";
 import { CategoryContext } from "../../context/category.context";
-
+import Footer from '../../Layouts/Nav/Footer/Footer'
 
 class NavBar extends Component{
   
@@ -43,7 +43,7 @@ class NavBar extends Component{
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="outline-primary">Search</Button>
+                <Button variant="outline-warning">Search</Button>
               </Form>
               <Nav
                 className=" my-2 my-lg-0"
@@ -65,6 +65,8 @@ class NavBar extends Component{
           </Container>
         </Navbar>
         <Outlet/>
+        <Footer />
+
           </Fragment>
         )
     }
