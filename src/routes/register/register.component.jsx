@@ -133,7 +133,7 @@ class Register extends Component{
                         Its not the same.
                     </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="warning" type="submit">
                     Submit
                 </Button>
                 <p>Already Have Account? <span className="anotherPage" onClick={() => {this.props.nav('/Login')}}>Login</span></p>

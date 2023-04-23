@@ -77,7 +77,7 @@ class Login extends Component{
                     </Form.Control.Feedback>
                 {this.state.data && <span className="worng"> {this.state.data}</span>}
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="warning" type="submit">
                     Submit
                 </Button>
                 <p>New User? <span className="anotherPage" onClick={() => {this.props.nav('/register')}}>Create Account</span></p>
