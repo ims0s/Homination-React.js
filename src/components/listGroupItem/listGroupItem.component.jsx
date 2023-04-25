@@ -11,8 +11,7 @@ class ListGroupItem extends Component {
 
     onClickHandler = () => {
         const {id} = this.props
-        console.log(id)
-        this.props.Navigate(`./details/${this.props.id}`)
+        this.props.Navigate(`./details/${id}`)
     }
 
     render() {
