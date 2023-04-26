@@ -68,7 +68,7 @@ class Categories extends Component{
                 <ListGroup>
                   {this.show()}
                 </ListGroup>
-                <Outlet photo="https://st.hzcdn.com/fimgs/9721524c0144b220_9930-w368-h207-b0-p0---.jpg" />
+                <Outlet/>
                 
             </Container>
         )

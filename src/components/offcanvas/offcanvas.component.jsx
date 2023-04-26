@@ -1,15 +1,15 @@
-import { Component } from "react";
+import { Component,useContext } from "react";
 import  Offcanvas  from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button"
-import Modal from 'react-bootstrap/Modal'
 import { useParams ,Navigate } from "react-router-dom";
 import "./offcanvas.style.css"
 import  Figure  from "react-bootstrap/Figure";
-import Form from 'react-bootstrap/Form'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import { InputGroup } from "react-bootstrap";
-
+import { UserContext } from "../../context/auth.context";
+import ProposalForm from '../proposalForm/proposalForm.component'
+import AuthPopup from '../authPopUp/authPopUp.component'
+import axios from "axios";
 class OffCanvas extends Component{
     constructor(){
         super();
@@ -24,17 +24,57 @@ class OffCanvas extends Component{
                 desc:'',
                 username:'',
             },
-            property:''
+            proposal:{Request_Description:{},},
+            validate:false,
         }
         
     }
-    
-    componentDidUpdate(){
-        
-    }
+
     handleClose = ()=>{
         this.setState(() =>{return {show:false}})
         
+    }
+
+    onChangeHandler=(e)=>{
+        const {id,value}=e.target;
+        
+        this.setState(()=>({
+            proposal:{
+                ...this.state.proposal,
+                Request_Description:{
+                    ...this.state.proposal.Request_Description,
+                    [id]:value,
+                }
+            }
+        }))
+    }
+
+    onSubmitHandler=(event)=>{
+        const {username}=this.props.UserContext.currentUser;
+        const {title,provider}=this.state.data;
+        const form = event.currentTarget;
+        
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }else{
+            event.preventDefault();
+            event.stopPropagation();
+            const proposal={
+                ...this.state.proposal,
+                client_Name:username,
+                provider_Name:provider,
+                service_Name:title,
+            }
+            axios.post('http://localhost:5000/requests/createRequest',proposal)
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                this.setState({modal:false})
+            })
+            .catch(e=>console.log(e))
+        }
+        this.setState(() => ({validate:true}),()=>console.log(this.state.validate))
     }
     
     componentDidMount(){
@@ -46,11 +86,14 @@ class OffCanvas extends Component{
             this.setState(() => ({data:data}))})
         
     }
+    modalHide=()=>{
+        this.setState(()=>({modal:false}))
+    }
     
     render(){
-        const {show,data,modal}=this.state;
-        const {photo}=this.props;
-        console.log(photo)
+        const {show,data,modal,validate}=this.state;
+        const {UserContext}=this.props;
+        const {currentUser}=UserContext;
         
         
         if(this.state.navigate) return <Navigate to='../../'/>
@@ -67,63 +110,13 @@ class OffCanvas extends Component{
                     <Col>
                         <h1>{data.title}</h1>
                         <h5>{data.desc}</h5>
-                        <Button variant="warning" onClick={()=>{this.setState(()=>({modal:true}))}}>Make request</Button>  
-                        <Modal show={modal} onHide={()=>{this.setState(()=>({modal:false}))}} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
-                            <Modal.Header closeButton >
-                                <Modal.Title id="contained-modal-title-vcenter">
-                                Request
-                                </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form noValidate>
-                                    <Row>
-                                        <Col lg={4}>
-                                            <Form.Group>
-                                                <Form.Label>Property type</Form.Label>
-                                                <Form.Select required>
-                                                    <option>Property Type</option>
-                                                    <option value="Villa">Villa</option>
-                                                    <option value="Apartment">Apartment</option>
-                                                    <option value="Office">Office</option>
-                                                </Form.Select>       
-                                            </Form.Group>
-                                        </Col>
-                                        <Col lg={4}>
-                                        <Form.Group>
-                                            <Form.Label>Property in m²</Form.Label>
-                                            <InputGroup >
-                                                <InputGroup.Text>m²</InputGroup.Text>
-                                                <Form.Control type="number" required />
-                                            </InputGroup>
-                                        </Form.Group>
-        
-                                        </Col>
-                                        <Col>
-                                        <Form.Group>
-                                            <Form.Label>Location</Form.Label>
-                                            <Form.Control required/>
-                                        </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col lg='fluid'>
-                                            <Form.Group>
-                                                <Form.Label>Description</Form.Label>
-                                                <Form.Control as='textarea' rows={3} required />
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                </Form>
-                            </Modal.Body>
-                            <Modal.Footer>
-                            <Button type="submit" variant="warning" >Submit</Button>
-                                <Button variant="outline-secondary" onClick={()=>{this.setState(()=>({modal:false}))}}>Close</Button>
-                            </Modal.Footer>
-                        </Modal>
+                        <Button variant="warning" onClick={()=>{this.setState(()=>({modal:true}))}}>Send proposal</Button>  
+                        {currentUser?<ProposalForm validate={validate} onSubmitHandler={this.onSubmitHandler} onChangeHandler={this.onChangeHandler} modal={modal} onhide={this.modalHide}/>
+                        :<AuthPopup modal={modal} onhide={this.modalHide} />}
                     </Col>
                     <Col>
                         <Figure>
-                            <Figure.Image width={300} height={168.75} src={photo} />
+                            <Figure.Image width={300} height={168.75} src="https://st.hzcdn.com/fimgs/9721524c0144b220_9930-w368-h207-b0-p0---.jpg" />
                         </Figure>
                     </Col>
                 </Row>
@@ -137,6 +130,7 @@ export default (props) => (
     <OffCanvas
         {...props}
         params={useParams()}
+        UserContext={useContext(UserContext)}
     />
 );
 ;

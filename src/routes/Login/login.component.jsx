@@ -26,7 +26,6 @@ class Login extends Component{
         event.preventDefault();
         event.stopPropagation();
         }else{
-            // this.props.nav('/')
             event.preventDefault();
             event.stopPropagation();
             axios.post('http://localhost:5000/auth/login',{username,password})

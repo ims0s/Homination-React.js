@@ -52,7 +52,7 @@ class Register extends Component{
 
     passwordRules=()=>{
         return this.state.passwordRules.map((i)=>{
-            return (<p className={i.state}>{i.name}</p>)
+            return (<p id={i.name} className={i.state}>{i.name}</p>)
         })
     }
 
