@@ -50,7 +50,13 @@ class OffCanvas extends Component{
     }
 
     onSubmitHandler=(event)=>{
-        const {username}=this.props.UserContext.currentUser;
+        const {username,token}=this.props.UserContext.currentUser;
+        const config = {
+            headers: {
+              Authorization: `${token}`,
+            },
+          };
+        
         const {title,provider}=this.state.data;
         const form = event.currentTarget;
         
@@ -65,11 +71,12 @@ class OffCanvas extends Component{
                 client_Name:username,
                 provider_Name:provider,
                 service_Name:title,
+                
             }
-            axios.post('http://localhost:5000/requests/createRequest',proposal)
-            .then(res=>res.json())
+            axios.post('http://localhost:5000/requests/createRequest',proposal,config)
+            .then(res=>res.data)
             .then(data=>{
-                console.log(data);
+                
                 this.setState({modal:false})
             })
             .catch(e=>console.log(e))
