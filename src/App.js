@@ -9,6 +9,7 @@ import Categories from './routes/categories/categories.component';
 import OffCanvas from './components/offcanvas/offcanvas.component';
 import Login from './routes/Login/login.component'
 import Register from './routes/register/register.component'
+import Proposals from "./routes/proposals/proposals.component"
 class App extends Component{
   
   render (){
@@ -31,6 +32,7 @@ class App extends Component{
             </Route>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/proposals' element={<Proposals/>} />
           </Route>
         </Routes>
       </div>
