@@ -32,6 +32,7 @@ class Register extends Component{
         
     }
     submitHandler=(event) => {
+        const { REACT_APP_BACKEND_API } = process.env
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
         event.preventDefault();
@@ -39,7 +40,7 @@ class Register extends Component{
         }else{
             event.preventDefault();
             event.stopPropagation();
-            axios.post('http://localhost:5000/auth/register',this.state.auth)
+            axios.post(`${REACT_APP_BACKEND_API}auth/register`,this.state.auth)
             .then(res => res.json)
             .then(data => {console.log(data);
                 this.props.nav('/login');

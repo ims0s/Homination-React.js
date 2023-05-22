@@ -50,6 +50,7 @@ class OffCanvas extends Component{
     }
 
     onSubmitHandler=(event)=>{
+        const { REACT_APP_BACKEND_API } = process.env
         const {username,token}=this.props.UserContext.currentUser;
         const config = {
             headers: {
@@ -73,7 +74,7 @@ class OffCanvas extends Component{
                 service_Name:title,
                 
             }
-            axios.post('http://localhost:5000/requests/createRequest',proposal,config)
+            axios.post(`${REACT_APP_BACKEND_API}requests/createRequest`,proposal,config)
             .then(res=>res.data)
             .then(data=>{
                 
@@ -85,9 +86,10 @@ class OffCanvas extends Component{
     }
     
     componentDidMount(){
+        const { REACT_APP_BACKEND_API } = process.env
         const {service_id} = this.props.params;
             
-        fetch(`http://localhost:5000/services/${service_id}`)
+        fetch(`${REACT_APP_BACKEND_API}services/${service_id}`)
         .then((res)=> res.json())
         .then((data)=> {
             this.setState(() => ({data:data}))})

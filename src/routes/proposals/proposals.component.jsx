@@ -16,10 +16,10 @@ class Proposals extends Component{
     }
 
     componentDidMount(){
-        const { REACT_APP_API } = process.env
+        const { REACT_APP_BACKEND_API } = process.env
         const { currentUser } = this.props.UserContext
         const { username, token } = currentUser
-        axios.get(`${REACT_APP_API}requests/provider/${username}`, { headers: { "Authorization": token } })
+        axios.get(`${REACT_APP_BACKEND_API}requests/client/${username}`, { headers: { "Authorization": token } })
         .then(res => this.setState(()=>({data:res.data})))
 
     }
@@ -41,51 +41,12 @@ class Proposals extends Component{
                         <td className="table-rem">  {location}</td>
                         <td className="table-rem">{`${propertyInMeter} ㎡`}</td>
                         <td className={`text-${this.statusColor(status)} text-center`}>{status}</td>
-                        <td>
-
-                            <Dropdown>
-                                <Dropdown.Toggle variant="warning">
-                                    Actions
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-
-                            {status==='pending'?(
-                                <Fragment>
-                                    <Dropdown.Item  onClick={(e)=>this.actionHandler(_id,e.target.id)} id="accept">Accept</Dropdown.Item>
-                                    <Dropdown.Item onClick={(e)=>this.actionHandler(_id,e.target.id)} id="reject">reject</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>this.deleteHandler(_id)} >delete</Dropdown.Item>
-                                </Fragment>
-                            ):(
-                                <Dropdown.Item onClick={()=>this.deleteHandler(_id)}>delete</Dropdown.Item>
-                            )}
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </td>
                     </tr>
                 )
             })
         )
     }
 
-    actionHandler=async (id,method)=>{
-        const {REACT_APP_API}=process.env;
-        const { currentUser } = this.props.UserContext;
-        const { username, token } = currentUser;
-       await axios.put(`${REACT_APP_API}requests/${id}/${method}`,{username},{ headers: { "Authorization": token } })
-
-       axios.get(`${REACT_APP_API}requests/provider/${username}`, { headers: { "Authorization": token } })
-       .then(res => this.setState(()=>({data:res.data})))
-    }
-
-    deleteHandler=async (id)=>{
-        const {REACT_APP_API}=process.env;
-        const { currentUser } = this.props.UserContext;
-        const { username, token } = currentUser;
-       await axios.delete(`${REACT_APP_API}requests/${id}`,{ headers: { "Authorization": token } , data:{username}})
-
-       axios.get(`${REACT_APP_API}requests/provider/${username}`, { headers: { "Authorization": token } })
-       .then(res => this.setState(()=>({data:res.data})))
-    }
 
     statusColor=(status)=>{
         if(status==='pending'){
@@ -115,7 +76,6 @@ class Proposals extends Component{
                                 <th className="table-rem">Location</th>
                                 <th className="table-rem">Area</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </CDBTableHeader>
                         <CDBTableBody>

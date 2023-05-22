@@ -18,6 +18,7 @@ class Login extends Component{
 
     }
     submitHandler=(event) => {
+        const { REACT_APP_BACKEND_API } = process.env
         const form = event.currentTarget;
         const {username,password}=this.state
         const {nav,userContext} =this.props
@@ -28,7 +29,7 @@ class Login extends Component{
         }else{
             event.preventDefault();
             event.stopPropagation();
-            axios.post('http://localhost:5000/auth/login',{username,password})
+            axios.post(`${REACT_APP_BACKEND_API}auth/login`,{username,password})
             .then(res => res.data )
             .then((data)=> {
                 setCurrentUser(data)
