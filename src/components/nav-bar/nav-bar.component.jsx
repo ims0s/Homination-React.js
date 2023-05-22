@@ -17,7 +17,7 @@ class NavBar extends Component{
         const {currentUser ,setCurrentUser} = this.props.userContext
         const {currentCategory,setCurrentCategory}=this.props.categoryContext
         const {navigate}=this.props
-        
+        const {REACT_APP_PROVIDER_APP}=process.env
         return(
           <Fragment>
             <Navbar bg="light" expand="lg" sticky="top">
@@ -32,9 +32,10 @@ class NavBar extends Component{
               >
                 <Nav.Link onClick={()=>navigate('/')}>Home</Nav.Link>
                 <NavDropdown title="Categories" id="navbarScrollingDropdown" href='/categories'>
-                  <NavDropdown.Item onClick={()=>{navigate('/categories/painting'); setCurrentCategory(!currentCategory) }}>Painting</NavDropdown.Item>
-                  <NavDropdown.Item onClick={()=>{navigate('/categories/foundation'); setCurrentCategory(!currentCategory)}}>Foundation</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/Interior Designers and Decorators'); setCurrentCategory(!currentCategory) }}>Interior Designers and Decorators</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/Foundation Builder'); setCurrentCategory(!currentCategory)}}>Foundation Builder</NavDropdown.Item>
                 </NavDropdown>
+                <Nav.Link href={REACT_APP_PROVIDER_APP}>Provider's Section</Nav.Link>
               </Nav>
               <Form className="d-flex">
                 <Form.Control
@@ -51,7 +52,10 @@ class NavBar extends Component{
                 navbarScroll
               >
                 {currentUser?(
-                  <Nav.Link onClick={()=>setCurrentUser(null)}>Logout</Nav.Link>
+                  <NavDropdown title={currentUser.username} align={{lg:'end'}} className="me-1" id="dropdown-menu-align-responsive-1">
+                  <NavDropdown.Item onClick={()=>navigate('/proposals')}>Proposals History</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{setCurrentUser(null); navigate('/')}}>Logout</NavDropdown.Item>
+                </NavDropdown>
                   )
                   :(
                     <Fragment>

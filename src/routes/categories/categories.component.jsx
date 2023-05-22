@@ -34,6 +34,7 @@ class Categories extends Component{
       
       let {type} = this.props.params;
         type = type.charAt(0).toUpperCase()+type.slice(1);
+        console.log(type)
         if(type !==this.state.type){
 
           fetch(`http://localhost:5000/services?cat=${type}`).then(res => res.json()).then(data => this.setState(()=>({data,type})))
