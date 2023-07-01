@@ -7,3 +7,7 @@
 .tableRow{
     max-height: 100px;
 }
+
+.overTable{
+    overflow-y: scroll;
+}
