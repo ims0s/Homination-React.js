@@ -16,10 +16,6 @@ const Term = () => {
             <div className="col-md-12">
               <div className="section-header text-center pb-5">
                 <h2 className="title">Our Team</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur <br />
-                  adipisicing elit. Non, quo.
-                </p>
               </div>
             </div>
           </div>

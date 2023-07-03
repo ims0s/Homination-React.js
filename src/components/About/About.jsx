@@ -23,17 +23,10 @@ return (
                 Services Ever
             </h2>
             <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Totam, labore reiciendis. Assumenda eos quod animi! Soluta
-                nesciunt inventore dolores excepturi provident, culpa beatae
-                tempora, explicabo corporis quibusdam corrupti. Autem,
-                quaerat. Assumenda quo aliquam vel, nostrum explicabo ipsum
-                dolor, ipsa perferendis porro doloribus obcaecati placeat
-                natus iste odio est non earum?
+            we take pride in our unwavering commitment to excellence, 
+            delivering the best quality services that surpass expectations, 
+            and setting the benchmark for superior craftsmanship in every project we undertake.
             </p>
-            <Link to="#" className="btn btn-warning">
-                Learn More
-            </Link>
             </div>
         </div>
         </div>

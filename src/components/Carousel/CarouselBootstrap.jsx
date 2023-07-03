@@ -4,7 +4,7 @@ import img0 from "../../images/homenation.webp";
 import img1 from "../../images/home-1.jpg";
 import img2 from "../../images/home-2.jpg";
 import Carousel from "react-bootstrap/Carousel";
-import { Link } from "react-router-dom";
+
 
 const CarouselBootstrap = () => {
   return (
@@ -15,13 +15,7 @@ const CarouselBootstrap = () => {
           <div class="carousel-caption">
             <h5>Your Dream House</h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-              nulla, tempore. Deserunt excepturi quas vero.
-            </p>
-            <p>
-              <Link to="#" class="btn btn-warning mt-3">
-                Learn More
-              </Link>
+            where luxurious design meets breathtaking views, creating an enchanting haven that exceeds your wildest imagination.
             </p>
           </div>
         </Carousel.Caption>
@@ -33,13 +27,7 @@ const CarouselBootstrap = () => {
           <div class="carousel-caption">
             <h5>Always Dedicated</h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-              nulla, tempore. Deserunt excepturi quas vero.
-            </p>
-            <p>
-              <Link to="#" class="btn btn-warning mt-3">
-                Learn More
-              </Link>
+            going above and beyond to exceed your expectations and ensure your utmost satisfaction.
             </p>
           </div>
         </Carousel.Caption>
@@ -51,13 +39,7 @@ const CarouselBootstrap = () => {
           <div class="carousel-caption">
             <h5>True Construction</h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
-              nulla, tempore. Deserunt excepturi quas vero.
-            </p>
-            <p>
-              <Link to="#" class="btn btn-warning mt-3">
-                Learn More
-              </Link>
+            we believe in the power of quality craftsmanship, attention to detail, and unwavering commitment, making us the trusted partner for turning your vision into reality.
             </p>
           </div>
         </Carousel.Caption>

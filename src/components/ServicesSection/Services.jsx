@@ -13,55 +13,48 @@ const Services = () => {
               <div className="section-header text-center pb-5">
                 <h2 className="title">Types of Work</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur <br />
-                  adipisicing elit. Non, quo.
+                Discover a wide array of exceptional work types tailored to your needs, <br />
+                from renovations and remodeling to new construction and beyond,  <br />
+                all delivered with uncompromising quality.
                 </p>
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-12 col-md-12 col-lg-4">
-              <div className="about-card text-white text-center bg-dark pb-2">
+              <div className="about-card text-white text-center bg-dark pb-2 h-100 d-flex flex-column">
                 <div className="card-body">
                   <BiLaptop size={"50px"} />
-                  <h3 className="card-title">Capient Rapire</h3>
+                  <h3 className="card-title">Renovations and Remodeling</h3>
                   <p className="lead">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Adipisci eligendi modi temporibus alias iste. Accusantium?
+                  Transform your existing space into a stunning masterpiece through our 
+                  expertise in renovations and remodeling, adding both functionality and aesthetic appeal.
                   </p>
-                  <button className="btn bg-warning text-dark">
-                    see provider
-                  </button>
                 </div>
               </div>
             </div>
             <div className="col-12 col-md-12 col-lg-4">
-              <div className="about-card text-white text-center bg-dark pb-2">
+              <div className="about-card text-white text-center bg-dark pb-2 h-100 d-flex flex-column">
                 <div className="card-body">
                   <BsJournal size={"50px"} />
-                  <h3 className="card-title">Capient Rapire</h3>
+                  <h3 className="card-title">New Construction</h3>
                   <p className="lead">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Adipisci eligendi modi temporibus alias iste. Accusantium?
+                  From concept to completion, our skilled team brings your vision to life with 
+                  new construction projects, ensuring attention to detail, quality materials, and efficient execution.
                   </p>
-                  <button className="btn bg-warning text-dark">
-                    see provider
-                  </button>
                 </div>
               </div>
             </div>
             <div className="col-12 col-md-12 col-lg-4">
-              <div className="about-card text-white text-center bg-dark pb-2">
+              <div className="about-card text-white text-center bg-dark pb-2 h-100 d-flex flex-column">
                 <div className="card-body">
                   <BiIntersect size={"50px"} />
-                  <h3 className="card-title">Capient Rapire</h3>
+                  <h3 className="card-title">Custom Designs</h3>
                   <p className="lead">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Adipisci eligendi modi temporibus alias iste. Accusantium?
+                  Experience the joy of owning a truly unique space tailored to your preferences. Our team 
+                  specializes in creating custom designs that reflect your individual 
+                  style and preferences, resulting in a one-of-a-kind environment.
                   </p>
-                  <button className="btn bg-warning text-dark">
-                    see provider
-                  </button>
                 </div>
               </div>
             </div>
