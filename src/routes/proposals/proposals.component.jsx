@@ -1,9 +1,10 @@
 import { Component,useContext,Fragment } from "react";
 import { CDBTable, CDBTableBody, CDBTableHeader } from "cdbreact";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Outlet ,} from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/auth.context";
 import Dropdown from 'react-bootstrap/Dropdown'
+import Button from 'react-bootstrap/Button'
 import './proposals.style.css'
 class Proposals extends Component{
 
@@ -30,14 +31,14 @@ class Proposals extends Component{
 
         return (
             data.map(e => {
-                const {client_Name,status,Request_Description,_id}=e;
+                const {provider_Name,status,Request_Description,_id}=e;
                 const {propertyInMeter,location,property_Type,request_Desc}=Request_Description
                 
                 return (
                     <tr key={_id} className="tableRow">
-                        <td>{client_Name}</td>
+                        <td>{provider_Name}</td>
                         <td className="table-rem">{property_Type}</td>
-                        <td className="table-rem "> <ul className="proposals-desc">
+                        <td className="table-rem "> <ul>
                             {Object.keys(request_Desc).map(key=>{
                                 if(key==='color'){
                                     return(
@@ -54,6 +55,7 @@ class Proposals extends Component{
                         <td className="table-rem">  {location}</td>
                         <td className="table-rem">{`${propertyInMeter} ㎡`}</td>
                         <td className={`text-${this.statusColor(status)} text-center`}>{status}</td>
+                        {status==='accepted'?(<td className="table-rem"><Button onClick={()=>{this.props.navigate(`./review/${provider_Name}`)}}>review</Button></td>):(<td className="table-rem"><Button disabled>review</Button></td>)}
                     </tr>
                 )
             })
@@ -75,7 +77,8 @@ class Proposals extends Component{
     render(){
 
         return(
-            <div className="card-bg w-100 d-flex flex-column wide vh-100 overTable d-flex flex-column p-3">
+            <div className="card-bg w-100 d-flex flex-column wide d-flex flex-column p-3">
+                <Outlet/>
                 <div className="d-flex flex-column p-0 h-100">
                     <div className="mx-4 mt-3 d-flex justify-content-between align-items-center">
                         <h4 className="font-weight-bold text-dark h5">Last Proposals</h4>
@@ -89,6 +92,7 @@ class Proposals extends Component{
                                 <th className="table-rem">Location</th>
                                 <th className="table-rem">Area</th>
                                 <th>Status</th>
+                                <th>review</th>
                             </tr>
                         </CDBTableHeader>
                         <CDBTableBody>

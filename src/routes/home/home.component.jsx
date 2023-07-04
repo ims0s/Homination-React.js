@@ -12,15 +12,10 @@ import Footer from "../../Layouts/Nav/Footer/Footer";
 class Home extends Component{
     render(){
        return (
-       <div className="home">
-            {/* <Nav /> */}
+       <div className="home"> 
             <CarouselBootstrap />
             <About />
             <Services />
-            <Portfolio />
-            <Term />
-            <ContactUS />
-            {/* <Footer /> */}
         </div>);
 
     }

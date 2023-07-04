@@ -10,6 +10,7 @@ import { Outlet,useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/auth.context";
 import { CategoryContext } from "../../context/category.context";
 import Footer from '../../Layouts/Nav/Footer/Footer'
+import './nav-bar.style.css'
 
 class NavBar extends Component{
   
@@ -32,10 +33,15 @@ class NavBar extends Component{
               >
                 <Nav.Link onClick={()=>navigate('/')}>Home</Nav.Link>
                 <NavDropdown title="Categories" id="navbarScrollingDropdown" href='/categories'>
+                  <span className="mainCat mx-3" >Design And Planing</span>
                   <NavDropdown.Item onClick={()=>{navigate('/categories/Interior Designers and Decorators'); setCurrentCategory(!currentCategory) }}>Interior Designers and Decorators</NavDropdown.Item>
-                  <NavDropdown.Item onClick={()=>{navigate('/categories/Foundation Builder'); setCurrentCategory(!currentCategory)}}>Foundation Builder</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/Kitchen And Bathroom Designers'); setCurrentCategory(!currentCategory)}}>Kitchen And Bathroom Designers</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('Lighting Designers'); setCurrentCategory(!currentCategory)}}>Lighting Designers</NavDropdown.Item>
+                  <span className="mainCat mx-3" >Construction And Renovation</span>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/General Contractors'); setCurrentCategory(!currentCategory) }}>General Contractors</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{navigate('/categories/Exterior And Siding Contractors'); setCurrentCategory(!currentCategory) }}>Exterior And Siding Contractors</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href={REACT_APP_PROVIDER_APP}>Provider's Section</Nav.Link>
+                {(!currentUser)&&<Nav.Link href={REACT_APP_PROVIDER_APP}>Provider's Section</Nav.Link>}
               </Nav>
               <Form className="d-flex">
                 <Form.Control

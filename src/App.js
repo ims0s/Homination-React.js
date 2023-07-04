@@ -10,6 +10,7 @@ import OffCanvas from './components/offcanvas/offcanvas.component';
 import Login from './routes/Login/login.component'
 import Register from './routes/register/register.component'
 import Proposals from "./routes/proposals/proposals.component"
+import ReviewForm from './routes/reviewForm/reviewForm.component';
 class App extends Component{
   
   render (){
@@ -32,7 +33,12 @@ class App extends Component{
             </Route>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/proposals' element={<Proposals/>} />
+          <Route path='/proposals' element={<Proposals/>} >
+            <Route path='review' >
+              <Route path=':provider' element={<ReviewForm show={true}/>} />
+
+            </Route>
+          </Route>
           </Route>
         </Routes>
       </div>
